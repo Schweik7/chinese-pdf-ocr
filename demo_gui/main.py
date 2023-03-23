@@ -10,6 +10,8 @@ from pdf2image import convert_from_path
 # self-defined modules to be added to PYTHONPATH
 project_root = os.path.dirname(os.path.abspath(__file__)) + '/..'
 sys.path.append(project_root)
+project_root = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(project_root)
 from pdfocr import PdfOcrTool
 # end of self-defined module list
 
@@ -25,8 +27,10 @@ def get_args():
 
 
 def main():
-    pdf_path, start_page, end_page = get_args()
-
+    #pdf_path, start_page, end_page = get_args()
+    pdf_path="./认知行为疗法_12884247.pdf"
+    start_page=1
+    end_page=309
     # init pdf ocr tool
     ocr = PdfOcrTool(newline="\n")
 
@@ -35,6 +39,7 @@ def main():
     images = convert_from_path(pdf_path,
                                first_page=start_page,
                                last_page=end_page)
+    print("len of images ",len(images))
     for img_idx, img in enumerate(images):
         page_num = start_page + img_idx
         print("Processing page %s ..." % page_num)
